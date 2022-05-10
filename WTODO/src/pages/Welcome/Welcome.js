@@ -34,7 +34,7 @@ const Welcome = ({navigation}) => {
         useNativeDriver: true,
         toValue: 0,
         duration: 300,
-        delay: 0,
+        delay: 150,
       }).start(() => {
         setBootSplashIsVisible(false);
       });
