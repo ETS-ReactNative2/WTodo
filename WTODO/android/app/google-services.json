@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "463873424393",
+    "project_id": "wtodo-22d83",
+    "storage_bucket": "wtodo-22d83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463873424393:android:b600d27034a9ac0cd30cd8",
+        "android_client_info": {
+          "package_name": "com.wtodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463873424393-gt8sv5t805nnp97vvu4qmscfcblqbvq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wtodo",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "463873424393-tajuj60tq988kdfs6d9d2cmsqps0vr17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSrFxxnl4BDCkGeY3W79a2sU-BHpHLwiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463873424393-tajuj60tq988kdfs6d9d2cmsqps0vr17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
