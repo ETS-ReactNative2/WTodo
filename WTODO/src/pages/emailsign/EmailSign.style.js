@@ -9,21 +9,6 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    
-    signinbutton:{
-        backgroundColor:'#ff7b25',
-        alignItems:'center',
-        borderRadius:8,
-        justifyContent:'center',
-        paddingVertical:12,
-        width:'90%',
-        elevation:8
-    },
-    buttontext:{
-        color:'white',
-        fontSize:20,
-        fontFamily:'RobotoCondensed-Italic'
-    },
     icon:{
         marginBottom:20,
         position:'absolute',

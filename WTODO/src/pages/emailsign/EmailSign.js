@@ -8,6 +8,7 @@ import auth from '@react-native-firebase/auth'
 import CheckLottie from '../../components/checkLottie/CheckLottie';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Input from '../../components/input/Input';
+import LoginButton from '../../components/LoginButton/LoginButton';
 
 
 
@@ -47,17 +48,14 @@ const EmailSign = ({ navigation }) => {
                         <Input placeHolder='enter your email' onChangeText={handleChange('email')} iconName='email' />
                         <Input placeHolder='enter your name' onChangeText={handleChange('name')} iconName='account' />
                         <Input placeHolder='enter your password' onChangeText={handleChange('password')} iconName='key' />
-                        <TouchableOpacity
-                        onPress={handleSubmit}
-                        style={styles.signinbutton}>
-                            {loading? <ActivityIndicator color={'white'} size={'small'} /> :
-                            <Text style={styles.buttontext} >CONTINUE WITH E-MAIL</Text>
-                            }
-                            
-                        </TouchableOpacity>
+                        <LoginButton buttontext='CONTINUE WITH E-MAIL' onPress={handleSubmit} loading={loading} theme='primary' />
                         <View style={styles.goLogin} >
                         <Text>Already have an account?</Text>
+                        <TouchableOpacity
+                        onPress={()=>navigation.navigate('EmailLoginPage')}
+                        >
                         <Text style={styles.logintext} >Login</Text>
+                        </TouchableOpacity>
                         </View>
                     </>
                 )}
