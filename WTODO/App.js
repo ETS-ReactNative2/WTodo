@@ -6,6 +6,7 @@ import {LogBox} from 'react-native'
 import Welcome from "./src/pages/Welcome/Welcome";
 import EmailSign from "./src/pages/emailsign/EmailSign";
 import Home from "./src/pages/home/Home";
+import EmailLogin from './src/pages/emailLogin/EmailLogin'
 LogBox.ignoreLogs([
   "ViewPropTypes will be removed",
   "ColorPropType will be removed",
@@ -32,6 +33,7 @@ const App = () => {
     <Stack.Navigator screenOptions={{headerShown:false}} >
     <Stack.Screen name="WelcomePage" component={Welcome} />
     <Stack.Screen name="EmailSignPage" component={EmailSign} />
+    <Stack.Screen name="EmailLoginPage" component={EmailLogin} />
     <Stack.Screen name="HomePage" component={StackNavigator} />
   </Stack.Navigator>
   </NavigationContainer>
