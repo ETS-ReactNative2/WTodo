@@ -2,7 +2,8 @@ import React,{useState,useEffect} from 'react'
 import {View,Text,TouchableOpacity,FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {showMessage} from 'react-native-flash-message'
-import PushNotification from "react-native-push-notification";
+import PushNotification, { Importance } from "react-native-push-notification";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import styles from './Home.style'
 import colors from '../../assets/colors/colors';
@@ -22,6 +23,12 @@ const Home = ({navigation}) => {
     useEffect(()=>{
         createChannel();
       },[])
+      useEffect(() =>{
+        getTodosFromUserDevice();
+      }, [])
+      useEffect(() => {
+        saveTodoTouserDevice(todoList);
+      }, [todoList]);
 
     const createChannel = () => {
         PushNotification.createChannel({
@@ -29,6 +36,25 @@ const Home = ({navigation}) => {
           channelName:'Test-Channel'
         } )
       }
+      const saveTodoTouserDevice = async todoList => {
+        try {
+          const stringifyTodos = JSON.stringify(todoList);
+          await AsyncStorage.setItem('@todoList', stringifyTodos);
+        } catch (e) {
+          console.log(e);
+          // saving error
+        }
+      };
+      const getTodosFromUserDevice = async () => {
+        try {
+          const todoList = await AsyncStorage.getItem('@todoList');
+          if(todoList != null){
+            setTodoList(JSON.parse(todoList));
+          }
+        } catch(error) {
+          console.log(error);
+        }
+      };
     
 
     const addTask = () => {
@@ -53,6 +79,8 @@ const Home = ({navigation}) => {
            
             if (date) {
                 PushNotification.localNotificationSchedule({
+                    allowWhileIdle:true,
+                    importance:Importance.HIGH,
                     title:'WTODO',
                     channelId:'test-channel',
                     message:`Have you finish ${todo}?`,
