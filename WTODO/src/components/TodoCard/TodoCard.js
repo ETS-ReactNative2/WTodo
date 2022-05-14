@@ -5,12 +5,12 @@ import colors from "../../assets/colors/colors";
 import Header from "../Header/Header";
 import styles from './TodoCard.style'
 
-const TodoCard = ({todo}) => {
+const TodoCard = ({todo,index}) => {
     const [isCompleted,setIsCompleted] = React.useState(false)
     return(
         <View style={styles.container} >
+            <Text style={styles.index_text} >{index+1}- </Text>
            <View style={styles.text_view} >
-               <Text>{todo.date}</Text>
             <Text 
             numberOfLines={2}
             style={[styles.todotext,{textDecorationLine:isCompleted?'line-through':'none'}]} >{todo.task}</Text>

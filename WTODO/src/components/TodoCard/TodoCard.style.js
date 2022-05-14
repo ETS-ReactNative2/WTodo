@@ -3,18 +3,20 @@ import colors from "../../assets/colors/colors";
 
 export default StyleSheet.create({
     container:{
-        borderWidth:2,
-        borderColor:colors.orange,
         marginBottom:10,
         padding:5,
         borderTopRightRadius:20,
         flexDirection:'row',
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
+        borderBottomWidth:1,
+        borderBottomColor:colors.orange
     },
     todotext:{
         fontSize:16,
-        fontWeight:'bold',
+        fontStyle:'italic',
+        fontWeight:'500',
+        
         
     },
     iconview:{
@@ -25,5 +27,10 @@ export default StyleSheet.create({
     },
     text_view:{
         width:250,
+    },
+    index_text:{
+        fontSize:16,
+        fontWeight:'bold',
+        color:'black'
     }
 })

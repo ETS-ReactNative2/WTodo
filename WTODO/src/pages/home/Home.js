@@ -10,6 +10,7 @@ import AddTaskModal from '../../components/AddTaskModal/AddTaskModal';
 import TodoCard from '../../components/TodoCard/TodoCard';
 import Header from '../../components/Header/Header';
 import DateTimePicker from '../../components/DateTimePicker/DateTimePicker';
+import AddTaskTutorial from '../../components/AddTaskTutorial/AddTaskTutorial';
 
 const Home = ({navigation}) => {
     const [date,setDate] = useState('')
@@ -75,7 +76,7 @@ const Home = ({navigation}) => {
          setTodoList([])
      }
 
-     const renderTodo = ({item}) => <TodoCard todo={item} />
+     const renderTodo = ({item,index}) => <TodoCard todo={item} index={index} />
 
      const openCalendar = () => {
         setIsDateTimeVisible(!isDateTimeVisible)
@@ -87,12 +88,15 @@ const Home = ({navigation}) => {
     return(
         <View style={styles.container} >
             <Header/>
-            <View style={styles.list_container} >
-            <FlatList
-            data={todoList}
-            renderItem={renderTodo}
-            />
-            </View>
+            {todoList.length>0?
+             <View style={styles.list_container} >
+             <FlatList
+             data={todoList}
+             renderItem={renderTodo}
+             />
+             </View> : <AddTaskTutorial/>
+        }
+           
             <TouchableOpacity onPress={removeTasks} >
                 <Text>Sil</Text>
             </TouchableOpacity>
