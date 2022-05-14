@@ -26,11 +26,21 @@ export default StyleSheet.create({
         marginRight:5
     },
     text_view:{
-        width:250,
+        width:230,
     },
     index_text:{
         fontSize:16,
         fontWeight:'bold',
-        color:'black'
+        color:'white'
+    },
+    index_container:{
+        backgroundColor:colors.orange,
+        marginRight:10,
+        justifyContent:'center',
+        alignItems:'center',
+        padding:2,
+        width:30,
+        height:30,
+        borderRadius:20
     }
 })

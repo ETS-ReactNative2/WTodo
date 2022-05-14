@@ -9,7 +9,9 @@ const TodoCard = ({todo,index}) => {
     const [isCompleted,setIsCompleted] = React.useState(false)
     return(
         <View style={styles.container} >
-            <Text style={styles.index_text} >{index+1}- </Text>
+            <View style={styles.index_container} >
+            <Text style={styles.index_text} >{index+1}</Text>
+            </View>
            <View style={styles.text_view} >
             <Text 
             numberOfLines={2}
@@ -18,13 +20,13 @@ const TodoCard = ({todo,index}) => {
             <View style={styles.iconview} >
                 <Icon 
                 name="check-circle" 
-                size={22} 
+                size={20} 
                 color={isCompleted?'#14D41A':'red'} 
                 solid={isCompleted} 
                 onPress={()=>setIsCompleted(!isCompleted)} />
                 <Icon 
                 name="trash"
-                size={22}
+                size={20}
                 color={'gray'}
                 />
             </View>
