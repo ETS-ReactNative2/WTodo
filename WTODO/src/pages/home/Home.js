@@ -49,16 +49,25 @@ const Home = ({navigation}) => {
                 completed:false,
                 date : date.toString()
             }
-            setTodoList([...todoList,newTodo])
-            setTodo('')
-            setIsModalVisible(false)
-            PushNotification.localNotificationSchedule({
-                title:'WTODO',
-                channelId:'test-channel',
-                message:`Have you finish ${todo}?`,
-                date: date,
-                channelName:'Test-Channel'
-              })
+           
+            if (date) {
+                PushNotification.localNotificationSchedule({
+                    title:'WTODO',
+                    channelId:'test-channel',
+                    message:`Have you finish ${todo}?`,
+                    date: date,
+                    channelName:'Test-Channel'
+                  })
+                  setTodoList([...todoList,newTodo])
+                  setTodo('')
+                  setIsModalVisible(false)
+            } else {
+               showMessage({
+                   message:'Please select a date',
+                   type:'warning'
+               })
+            }
+            
          }
         
      }

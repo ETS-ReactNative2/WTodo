@@ -8,6 +8,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome5'
 const AddTaskModal = ({isVisible,onClose,onPressSendIcon,onPressAddTask,onPressCalendar,onChangeText}) => {
     return(
         <Modal
+        animationInTiming={600}
+        animationOutTiming={600}
         swipeDirection='down' 
         onSwipeComplete={onClose}
         style={styles.modal}
