@@ -10,8 +10,7 @@ const base_style= StyleSheet.create({
         width:'90%',
         elevation:8
         },
-        text:{
-           
+        text:{  
             fontSize:16,
             fontFamily:'RobotoCondensed-Italic',
             fontWeight:'bold'

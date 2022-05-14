@@ -283,6 +283,7 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
     implementation project(':react-native-vector-icons')
+    implementation project(':react-native-push-notification')
     
 
     if (enableHermes) {

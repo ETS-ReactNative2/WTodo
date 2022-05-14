@@ -9,6 +9,7 @@ import CheckLottie from '../../components/checkLottie/CheckLottie';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Input from '../../components/input/Input';
 import LoginButton from '../../components/LoginButton/LoginButton';
+import ForgetPassword from '../forgetPassword/ForgetPassword';
 
 
 
@@ -28,7 +29,7 @@ const EmailLogin = ({ navigation }) => {
             setLoading(true)
             await auth().signInWithEmailAndPassword(formValues.email, formValues.password)
             setLoading(false)
-            navigation.navigate('HomePage')
+            navigation.navigate('Home')
         } catch (error) {
             setLoading(true)
             console.log(error)
@@ -47,6 +48,9 @@ const EmailLogin = ({ navigation }) => {
                     <>
                         <Input placeHolder='enter your email' onChangeText={handleChange('email')} iconName='email' />
                         <Input placeHolder='enter your password' onChangeText={handleChange('password')} iconName='key' />
+                        <TouchableOpacity onPress={()=> navigation.navigate('ForgetPasswordPage')} >
+                        <Text style={styles.forgotpasswordtext} >Forgot your password?</Text>
+                        </TouchableOpacity>
                         <LoginButton buttontext='LOGIN WITH E-MAIL' onPress={handleSubmit} loading={loading} theme='primary' />
                         <LoginButton buttontext='GO BACK' onPress={()=> navigation.goBack()} loading={loading} theme='secondary' />
                     </>

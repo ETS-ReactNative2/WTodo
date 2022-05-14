@@ -1,12 +1,110 @@
-import React from 'react'
-import {View,Text,Button} from 'react-native';
+import React,{useState,useEffect} from 'react'
+import {View,Text,TouchableOpacity,FlatList} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import {showMessage} from 'react-native-flash-message'
+import PushNotification from "react-native-push-notification";
+
+import styles from './Home.style'
+import colors from '../../assets/colors/colors';
+import AddTaskModal from '../../components/AddTaskModal/AddTaskModal';
+import TodoCard from '../../components/TodoCard/TodoCard';
+import Header from '../../components/Header/Header';
+import DateTimePicker from '../../components/DateTimePicker/DateTimePicker';
 
 const Home = ({navigation}) => {
+    const [date,setDate] = useState('')
+    const [isDateTimeVisible,setIsDateTimeVisible] = useState(false)
+    const [todoList,setTodoList] = useState([])
+    const [todo,setTodo] = useState('')
+    const [isModalVisible,setIsModalVisible] = useState(false)
+
+    useEffect(()=>{
+        createChannel();
+      },[])
+
+    const createChannel = () => {
+        PushNotification.createChannel({
+          channelId:'test-channel',  
+          channelName:'Test-Channel'
+        } )
+      }
+    
+
+    const addTask = () => {
+        setIsModalVisible(true)
+    }
+    const closeModal = () => {
+        setIsModalVisible(!isModalVisible)
+    }
+     const handleAddTask = () => {
+         if (todo=='') {
+             showMessage({
+                 message:'Task cant be empty',
+                 type:'danger'
+             })
+         } else {
+            const newTodo = {
+                id : Math.random(),
+                task : todo,
+                completed:false,
+                date : date.toString()
+            }
+            setTodoList([...todoList,newTodo])
+            setTodo('')
+            setIsModalVisible(false)
+            PushNotification.localNotificationSchedule({
+                title:'WTODO',
+                channelId:'test-channel',
+                message:`Have you finish ${todo}?`,
+                date: date,
+                channelName:'Test-Channel'
+              })
+         }
+        
+     }
+     const removeTasks = () => {
+         setTodoList([])
+     }
+
+     const renderTodo = ({item}) => <TodoCard todo={item} />
+
+     const openCalendar = () => {
+        setIsDateTimeVisible(!isDateTimeVisible)
+     }
+     const handleConfirm = (selectedDate) => {
+         setDate(selectedDate)
+     }
+
     return(
-        <View>
-            <Text>Home Page</Text>
-            <Button title='goBack' onPress={()=> navigation.navigate('WelcomePage')} />
-        </View>
+        <View style={styles.container} >
+            <Header/>
+            <View style={styles.list_container} >
+            <FlatList
+            data={todoList}
+            renderItem={renderTodo}
+            />
+            </View>
+            <TouchableOpacity onPress={removeTasks} >
+                <Text>Sil</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+            onPress={addTask}
+            style={styles.addtaskbutton} >
+                <Icon name='plus' size={30} color='white' />
+            </TouchableOpacity>
+            <AddTaskModal 
+            onPressCalendar={openCalendar}
+            isVisible={isModalVisible} 
+            onClose={closeModal}
+            onChangeText={(text)=> setTodo(text)}
+            onPressAddTask={handleAddTask}
+            />
+            <DateTimePicker
+            handleConfirm={handleConfirm}
+            handleCancel={()=>setIsDateTimeVisible(false)}
+            isDateTimeVisible={isDateTimeVisible}
+            />
+        </View> 
     )
 }
 export default Home

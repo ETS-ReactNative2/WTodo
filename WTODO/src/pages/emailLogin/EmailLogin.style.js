@@ -25,5 +25,11 @@ export default StyleSheet.create({
         marginTop:20
         
     },
+    forgotpasswordtext:{
+        textDecorationLine:'underline',
+        color:colors.navyblue,
+        marginBottom:2,
+        marginTop:2
+    }
     
 })
