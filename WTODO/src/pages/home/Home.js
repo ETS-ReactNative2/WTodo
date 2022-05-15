@@ -115,7 +115,7 @@ const Home = ({navigation}) => {
 
     return(
         <View style={styles.container} >
-            <Header/>
+            
             {todoList.length>0?
              <View style={styles.list_container} >
              <FlatList

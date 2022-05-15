@@ -1,10 +1,14 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { LogBox } from 'react-native'
+import { LogBox,TouchableOpacity } from 'react-native'
 import FlashMessage from 'react-native-flash-message'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import auth from '@react-native-firebase/auth'
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import * as BootSplash from 'react-native-bootsplash'
 
 import colors from "./src/assets/colors/colors";
 import Welcome from "./src/pages/Welcome/Welcome";
@@ -50,14 +54,52 @@ const StackNavigator = () => {
 }
 
 const App = () => {
+  const [userSession, setUserSession] = useState();
+  useEffect(() => {
+    auth().onUserChanged(user => {
+      setUserSession(!!user)
+    })
+  }, [])
+
+  const goSignOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+     auth().signOut();
+     setUserSession(!userSession)
+    } catch (error) {
+      console.log(error)
+    }
+    
+}
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} >
-        <Stack.Screen name="WelcomePage" component={Welcome} />
+    <NavigationContainer onReady={() => BootSplash.hide()} >
+      <Stack.Navigator  >
+
+        {!userSession ?  <Stack.Screen options={{headerShown:false}} name="WelcomePage" component={Welcome} /> : 
+        <Stack.Screen
+        options={{
+          title: `WTODO`,
+          headerRight: () =>
+           <TouchableOpacity> 
+            <Icon name='logout' size={30} color='white'
+              onPress={goSignOut} />
+              </TouchableOpacity>,
+          headerTitleStyle: 'white',
+          headerTintColor: 'white',
+          headerTitleStyle:{fontSize:24,fontFamily:'RobotoCondensed-BoldItalic'},
+          headerStyle: { backgroundColor: colors.navyblue, height:100 },
+          headerTitleAlign:'center',
+          headerLeft: () => <Icon name="logout" size={80} color={colors.navyblue} />
+          
+        }}
+        name="HomePage" component={StackNavigator} />
+        }
+       
         <Stack.Screen name="EmailSignPage" component={EmailSign} />
         <Stack.Screen name="EmailLoginPage" component={EmailLogin} />
         <Stack.Screen name="ForgetPasswordPage" component={ForgetPassword} />
-        <Stack.Screen name="HomePage" component={StackNavigator} />
+        
       </Stack.Navigator>
       <FlashMessage position="top" />
     </NavigationContainer>
