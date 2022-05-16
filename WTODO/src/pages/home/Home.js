@@ -79,9 +79,11 @@ const Home = ({navigation}) => {
            
             if (date) {
                 PushNotification.localNotificationSchedule({
+                    largeIcon:'ic_launcher_round',
+                    smallIcon:'ic_launcher_round',
                     allowWhileIdle:true,
                     importance:Importance.HIGH,
-                    title:'WTODO',
+                    title:'WTodo',
                     channelId:'test-channel',
                     message:`Have you finish ${todo}?`,
                     date: date,
@@ -129,10 +131,6 @@ const Home = ({navigation}) => {
              />
              </View> : <AddTaskTutorial/>
         }
-           
-            <TouchableOpacity onPress={removeTasks} >
-                <Text>Sil</Text>
-            </TouchableOpacity>
             <TouchableOpacity 
             onPress={addTask}
             style={styles.addtaskbutton} >
