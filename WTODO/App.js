@@ -33,19 +33,19 @@ const StackNavigator = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === 'Home') {
-            iconName = 'home'
+            iconName = 'check-all'
           }
           if (route.name === 'Settings') {
-            iconName = 'cog'
+            iconName = 'water-check'
           }
-          return <FontAwesome name={iconName} color={color} size={24} />
+          return <Icon name={iconName} color={color} size={24} />
         },
         tabBarActiveTintColor: colors.orange,
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen name="Home" options={{title:'Tasks'}} component={Home} />
+      <Tab.Screen name="Settings" options={{title:'Check Water'}} component={Settings} />
     </Tab.Navigator>
 
 
