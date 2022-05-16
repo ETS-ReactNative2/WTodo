@@ -103,8 +103,13 @@ const Home = ({navigation}) => {
      const removeTasks = () => {
          setTodoList([])
      }
+     
+      const goRemoveSpesificTask  = (todoId) => {
+        const newTodos = todoList.filter(item => item.id != todoId)
+        setTodoList(newTodos)
+      }
 
-     const renderTodo = ({item,index}) => <TodoCard todo={item} index={index} />
+     const renderTodo = ({item,index}) => <TodoCard todo={item} index={index} onPressTrash={goRemoveSpesificTask} />
 
      const openCalendar = () => {
         setIsDateTimeVisible(!isDateTimeVisible)

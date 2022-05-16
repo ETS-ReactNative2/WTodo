@@ -5,7 +5,7 @@ import colors from "../../assets/colors/colors";
 import Header from "../Header/Header";
 import styles from './TodoCard.style'
 
-const TodoCard = ({todo,index}) => {
+const TodoCard = ({todo,index,onPressTrash}) => {
     const [isCompleted,setIsCompleted] = React.useState(false)
     return(
         <View style={styles.container} >
@@ -25,6 +25,7 @@ const TodoCard = ({todo,index}) => {
                 solid={isCompleted} 
                 onPress={()=>setIsCompleted(!isCompleted)} />
                 <Icon 
+                onPress={() => onPressTrash(todo?.id)}
                 name="trash"
                 size={20}
                 color={'gray'}
