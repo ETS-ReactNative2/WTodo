@@ -79,6 +79,8 @@ const Home = ({navigation}) => {
            
             if (date) {
                 PushNotification.localNotificationSchedule({
+                    id:'1',
+                    userInfo:{id:'123'},
                     largeIcon:'ic_launcher_round',
                     smallIcon:'ic_launcher_round',
                     allowWhileIdle:true,
@@ -108,6 +110,7 @@ const Home = ({navigation}) => {
      
       const goRemoveSpesificTask  = (todoId) => {
         const newTodos = todoList.filter(item => item.id != todoId)
+        PushNotification.cancelLocalNotification({id:'123'})
         setTodoList(newTodos)
       }
 
