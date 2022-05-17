@@ -9,6 +9,7 @@ import CheckLottie from '../../components/checkLottie/CheckLottie';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Input from '../../components/input/Input';
 import LoginButton from '../../components/LoginButton/LoginButton';
+import { showMessage } from 'react-native-flash-message';
 
 
 
@@ -24,17 +25,23 @@ const EmailSign = ({ navigation }) => {
         navigation.goBack();
     }
     const handleFormSubmit = async (formValues) => {
-        try {
-            setLoading(true)
-            await auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
-            setLoading(false)
-            navigation.navigate('HomePage')
-        } catch (error) {
-            setLoading(true)
-            console.log(error)
-            setLoading(false)
+        if (formValues.email || formValues.password || formValues.name =='') {
+            showMessage({
+                message:'Email, name or password cant be empty',
+                type:'danger'
+            })
+        } else {
+            try {
+                setLoading(true)
+                await auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
+                setLoading(false)
+                navigation.navigate('HomePage')
+            } catch (error) {
+                setLoading(true)
+                console.log(error)
+                setLoading(false)
+            }
         }
-
     }
     return (
         <View style={styles.container} >

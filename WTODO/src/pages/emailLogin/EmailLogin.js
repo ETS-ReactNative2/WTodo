@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Input from '../../components/input/Input';
 import LoginButton from '../../components/LoginButton/LoginButton';
 import ForgetPassword from '../forgetPassword/ForgetPassword';
+import {showMessage} from 'react-native-flash-message'
 
 
 
@@ -25,17 +26,23 @@ const EmailLogin = ({ navigation }) => {
         navigation.goBack();
     }
     const handleFormSubmit = async (formValues) => {
-        try {
-            setLoading(true)
-            await auth().signInWithEmailAndPassword(formValues.email, formValues.password)
-            setLoading(false)
-            navigation.navigate('Home')
-        } catch (error) {
-            setLoading(true)
-            console.log(error)
-            setLoading(false)
+        if (formValues.email || formValues.password =='') {
+            showMessage({
+                message:'Email or password cant be empty',
+                type:'danger'
+            })
+        } else{
+            try {
+                setLoading(true)
+                await auth().signInWithEmailAndPassword(formValues.email, formValues.password)
+                setLoading(false)
+                navigation.navigate('Home')
+            } catch (error) {
+                setLoading(true)
+                console.log(error)
+                setLoading(false)
+            }
         }
-
     }
     return (
         <View style={styles.container} >
