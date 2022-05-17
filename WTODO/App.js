@@ -96,9 +96,9 @@ const App = () => {
         name="HomePage" component={StackNavigator} />
         }
        
-        <Stack.Screen name="EmailSignPage" component={EmailSign} />
-        <Stack.Screen name="EmailLoginPage" component={EmailLogin} />
-        <Stack.Screen name="ForgetPasswordPage" component={ForgetPassword} />
+        <Stack.Screen options={{headerShown:false}} name="EmailSignPage" component={EmailSign} />
+        <Stack.Screen options={{headerShown:false}} name="EmailLoginPage" component={EmailLogin} />
+        <Stack.Screen options={{headerShown:false}} name="ForgetPasswordPage" component={ForgetPassword} />
         
       </Stack.Navigator>
       <FlashMessage position="top" />
