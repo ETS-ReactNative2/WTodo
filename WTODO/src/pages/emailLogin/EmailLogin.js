@@ -26,24 +26,27 @@ const EmailLogin = ({ navigation }) => {
         navigation.goBack();
     }
     const handleFormSubmit = async (formValues) => {
-        if (formValues.email || formValues.password =='') {
-            showMessage({
-                message:'Email or password cant be empty',
-                type:'danger'
-            })
-        } else{
+      
             try {
                 setLoading(true)
-                await auth().signInWithEmailAndPassword(formValues.email, formValues.password)
-                setLoading(false)
-                navigation.navigate('Home')
+                if (formValues.email||formValues.password != '') {
+                    await auth().signInWithEmailAndPassword(formValues.email, formValues.password)
+                    setLoading(false)
+                    navigation.navigate('HomePage')
+                } else{
+                    showMessage({
+                        message:'Email or password cannot be empty',
+                        type:'danger'
+                    })
+                    setLoading(false)
+                }
+              
             } catch (error) {
                 setLoading(true)
                 console.log(error)
                 setLoading(false)
             }
         }
-    }
     return (
         <View style={styles.container} >
             <FontAwesome5 name='times' color={'gray'} size={20} style={styles.icon} onPress={goBack} />

@@ -10,7 +10,7 @@ export default StyleSheet.create({
     lottie_container:{
         width:300,
         position:'absolute',
-        top:160,
+        top:180,
         right:30
     },
     text:{

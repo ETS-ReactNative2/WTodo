@@ -21,37 +21,13 @@ import Settings from './src/pages/Settings/Settings'
 LogBox.ignoreLogs([
   "ViewPropTypes will be removed",
   "ColorPropType will be removed",
+  "Warning: Can't perform a React state update on an unmounted component."
 ])
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const StackNavigator = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          if (route.name === 'Home') {
-            iconName = 'check-all'
-          }
-          if (route.name === 'Settings') {
-            iconName = 'water-check'
-          }
-          return <Icon name={iconName} color={color} size={24} />
-        },
-        tabBarActiveTintColor: colors.orange,
-        tabBarInactiveTintColor: 'gray',
-        headerShown: false,
-      })}>
-      <Tab.Screen name="Home" options={{title:'Tasks'}} component={Home} />
-      <Tab.Screen name="Settings" options={{title:'Check Water'}} component={Settings} />
-    </Tab.Navigator>
 
-
-  )
-
-}
 
 const App = () => {
   const [userSession, setUserSession] = useState();
@@ -93,7 +69,7 @@ const App = () => {
           headerLeft: () => <Icon name="logout" size={80} color={colors.navyblue} />
           
         }}
-        name="HomePage" component={StackNavigator} />
+        name="HomePage" component={Home} />
         }
        
         <Stack.Screen options={{headerShown:false}} name="EmailSignPage" component={EmailSign} />

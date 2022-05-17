@@ -25,23 +25,26 @@ const EmailSign = ({ navigation }) => {
         navigation.goBack();
     }
     const handleFormSubmit = async (formValues) => {
-        if (formValues.email || formValues.password || formValues.name =='') {
-            showMessage({
-                message:'Email, name or password cant be empty',
-                type:'danger'
-            })
-        } else {
+       
             try {
                 setLoading(true)
-                await auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
-                setLoading(false)
-                navigation.navigate('HomePage')
+                if (formValues.email||formValues.password != '') {
+                    await auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
+                    setLoading(false)
+                    navigation.navigate('HomePage')
+                } else{
+                    showMessage({
+                        message:'Email, name or password cannot be empty',
+                        type:'danger'
+                    })
+                    setLoading(false)
+                }
+               
             } catch (error) {
                 setLoading(true)
                 console.log(error)
                 setLoading(false)
             }
-        }
     }
     return (
         <View style={styles.container} >
